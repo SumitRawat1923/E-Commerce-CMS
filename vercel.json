@@ -1,8 +1,0 @@
-{
-  "build": {
-    "env": {
-      "PRISMA_CLIENT_ENGINE_TYPE": "binary"
-    },
-    "buildCommand": "npm run build && prisma generate"
-  }
-}

@@ -31,7 +31,7 @@ export async function POST(
       return NextResponse.json("ColorId is required", { status: 400 });
     if (!sizeId)
       return NextResponse.json("SizeId is required", { status: 400 });
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,

@@ -13,7 +13,7 @@ export async function PATCH(
     if (!storeId)
       return new NextResponse("StoreId is required", { status: 401 });
     if (!name) return new NextResponse("Name is required", { status: 401 });
-    const store = await prismadb.store.update({
+    const store = await prismadb.store.updateMany({
       where: {
         id: storeId,
         userId,

@@ -29,7 +29,7 @@ async function ProductsPage({
     category: item.category.name,
     size: item.size.name,
     color: item.color.name,
-
+    colorValue: item.color.value,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 

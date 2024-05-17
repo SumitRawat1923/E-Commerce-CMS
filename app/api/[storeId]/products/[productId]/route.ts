@@ -1,6 +1,7 @@
 import prismadb from "@/lib/primsadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import { boolean } from "zod";
 
 export async function GET(
   req: Request,
@@ -11,13 +12,17 @@ export async function GET(
     const categoryId = searchParams.get("categoryId") || undefined;
     const sizeId = searchParams.get("sizeId") || undefined;
     const colorId = searchParams.get("colorId") || undefined;
-    const isFeatured = searchParams.get("isFeatured");
+    const isFeatured = searchParams.get("isFeatured") === "true";
 
     if (!productId)
       return new NextResponse("ProductId is required", { status: 401 });
-    const product = await prismadb.product.findUnique({
+    const product = await prismadb.product.findFirst({
       where: {
         id: productId,
+        categoryId,
+        sizeId,
+        colorId,
+        isFeatured,
       },
       include: {
         Image: true,
@@ -70,7 +75,7 @@ export async function PATCH(
     if (!sizeId)
       return NextResponse.json("SizeId is required", { status: 400 });
 
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,

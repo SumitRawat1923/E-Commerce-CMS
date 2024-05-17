@@ -14,7 +14,7 @@ export async function POST(
     if (!userId) return NextResponse.json("Unauthenticated", { status: 401 });
     if (!name) return NextResponse.json("Name is required", { status: 400 });
     if (!value) return NextResponse.json("Value is required", { status: 400 });
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,

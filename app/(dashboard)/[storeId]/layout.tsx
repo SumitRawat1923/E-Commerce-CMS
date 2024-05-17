@@ -4,6 +4,8 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
 
+const isValidObjectId = (id: string) => /^[a-f\d]{24}$/i.test(id);
+
 async function DashBoardLayout({
   children,
   params,
@@ -13,6 +15,10 @@ async function DashBoardLayout({
 }) {
   const { userId } = auth();
   if (!userId) redirect("/sign-in");
+
+  if (!isValidObjectId(params.storeId)) {
+    redirect("/");
+  }
 
   const store = await prismadb.store.findFirst({
     where: {

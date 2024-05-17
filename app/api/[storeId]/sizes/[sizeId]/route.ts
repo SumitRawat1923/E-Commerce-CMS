@@ -38,7 +38,7 @@ export async function PATCH(
     if (!name) return new NextResponse("Name is required", { status: 401 });
     if (!value) return new NextResponse("Value is required", { status: 401 });
 
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,
@@ -74,7 +74,7 @@ export async function DELETE(
       return new NextResponse("SizeId is required", { status: 401 });
     }
 
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,

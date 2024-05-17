@@ -3,15 +3,19 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import React from "react";
 import SettingsForm from "./components/settings-form";
+
 interface SettingsPageProps {
   params: {
     storeId: string;
   };
 }
+
 async function SettingsPage({ params: { storeId } }: SettingsPageProps) {
   const { userId } = auth();
   if (!userId) redirect("/sign-in");
-  const store = await prismadb.store.findUnique({
+
+
+  const store = await prismadb.store.findFirst({
     where: {
       userId,
       id: storeId,

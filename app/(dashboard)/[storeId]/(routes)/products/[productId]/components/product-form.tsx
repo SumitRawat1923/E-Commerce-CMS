@@ -34,9 +34,9 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 interface ProductFormProps {
   initialData: (Product & { Image: Image[] }) | null;
-  categories: Category[];
-  sizes: Size[];
-  colors: Color[];
+  categories: Category[] | null;
+  sizes: Size[] | null;
+  colors: Color[] | null;
 }
 
 const formSchema = z.object({
@@ -225,7 +225,7 @@ function ProductForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent align="start">
-                      {categories.map((category) => (
+                      {categories?.map((category) => (
                         <SelectItem key={category.id} value={category.id}>
                           {category.name}
                         </SelectItem>
@@ -259,7 +259,7 @@ function ProductForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent align="start">
-                      {colors.map((color) => (
+                      {colors?.map((color) => (
                         <SelectItem key={color.id} value={color.id}>
                           {color.name}
                         </SelectItem>
@@ -293,7 +293,7 @@ function ProductForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent align="start">
-                      {sizes.map((size) => (
+                      {sizes?.map((size) => (
                         <SelectItem key={size.id} value={size.id}>
                           {size.name}
                         </SelectItem>

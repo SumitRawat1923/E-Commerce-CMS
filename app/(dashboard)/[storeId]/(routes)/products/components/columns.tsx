@@ -13,6 +13,7 @@ export type ProductColumn = {
   isArchived: boolean;
   price: string;
   createdAt: string;
+  colorValue: string;
 };
 
 export const columns: ColumnDef<ProductColumn>[] = [
@@ -48,7 +49,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
         {row.original.color}
         <div
           className="h-6 w-6 rounded-full border"
-          style={{ backgroundColor: row.original.color }}
+          style={{ backgroundColor: row.original.colorValue }}
         ></div>
       </div>
     ),

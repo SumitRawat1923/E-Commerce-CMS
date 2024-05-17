@@ -15,7 +15,7 @@ export async function POST(
     if (!label) return NextResponse.json("Label is required", { status: 400 });
     if (!imageUrl)
       return NextResponse.json("Image URL is required", { status: 400 });
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,

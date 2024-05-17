@@ -38,7 +38,7 @@ export async function PATCH(
     if (!imageUrl)
       return new NextResponse("Image URL is required", { status: 401 });
 
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,
@@ -74,7 +74,7 @@ export async function DELETE(
       return new NextResponse("BillBoardId is required", { status: 401 });
     }
 
-    const storeByUserId = await prismadb.store.findUnique({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         userId,
         id: storeId,

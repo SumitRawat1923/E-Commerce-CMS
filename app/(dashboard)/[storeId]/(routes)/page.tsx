@@ -9,12 +9,16 @@ import { Separator } from "@/components/ui/separator";
 import { formatter } from "@/lib/utils";
 import { Box, CreditCard, DollarSign } from "lucide-react";
 import React from "react";
+import { redirect } from "next/navigation";
+
+const isValidObjectId = (id: string) => /^[a-f\d]{24}$/i.test(id);
 
 async function DashboardPage({
   params: { storeId },
 }: {
   params: { storeId: string };
 }) {
+
   const totalRevenue = await getTotalRevenue(storeId);
   const salesCount = await getSalesCount(storeId);
   const stockCount = await getStockCount(storeId);
